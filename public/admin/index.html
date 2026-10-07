@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - Dulce Arte</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+    <!-- Sidebar de Navegación -->
+    <aside class="sidebar" id="sidebar">
+        <div class="brand-header">
+            <div class="brand-logo-icon">🍰</div>
+            <div>
+                <div class="brand-title">Dulce Arte</div>
+                <div class="brand-sub">Gestión & Costeo</div>
+            </div>
+        </div>
+
+        <ul class="nav-links">
+            <li class="nav-item active" data-view="dashboard">
+                <button type="button">
+                    <span class="icon">📊</span>
+                    <span>Dashboard</span>
+                </button>
+            </li>
+            <li class="nav-item" data-view="ingredients">
+                <button type="button">
+                    <span class="icon">🌾</span>
+                    <span>Insumos y Costos</span>
+                </button>
+            </li>
+            <li class="nav-item" data-view="recipes">
+                <button type="button">
+                    <span class="icon">📐</span>
+                    <span>Constructor de Escandallos</span>
+                </button>
+            </li>
+            <li class="nav-item" data-view="products">
+                <button type="button">
+                    <span class="icon">🎂</span>
+                    <span>Productos y Catálogo</span>
+                </button>
+            </li>
+            <li class="nav-item" data-view="calendar">
+                <button type="button">
+                    <span class="icon">📅</span>
+                    <span>Agenda de Producción</span>
+                </button>
+            </li>
+        </ul>
+
+        <div class="sidebar-footer">
+            <a href="/" target="_blank" class="link-public">
+                <span>🌐</span>
+                <span>Ver Catálogo Público</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Contenido Principal -->
+    <div class="main-wrapper">
+        <header class="topbar">
+            <h1 class="page-title" id="pageTitleHeader">Panel de Control</h1>
+            <div class="topbar-actions">
+                <div class="badge-status online" id="systemHealthBadge">
+                    <span style="font-size: 8px;">●</span>
+                    <span id="systemHealthText">Sistema Conectado</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="content-area">
+            
+            <!-- VISTA 1: DASHBOARD -->
+            <section id="view-dashboard" class="view-section active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon orange">🌾</div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="statIngredients">0</div>
+                            <div class="stat-label">Insumos Registrados</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon brown">🎂</div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="statProducts">0</div>
+                            <div class="stat-label">Productos Activos</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon blue">📅</div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="statTodayOrders">0 / 8</div>
+                            <div class="stat-label">Pedidos Hoy (17 a 20 hs)</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">⏳</div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="statPendingOrders">0</div>
+                            <div class="stat-label">Pedidos Pendientes</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h2 class="card-title">Resumen Operativo de Hoy</h2>
+                            <p class="card-subtitle">Entregas programadas de lunes a sábado de 17:00 a 20:00 hs</p>
+                        </div>
+                        <button class="btn btn-primary" onclick="adminApp.navigate('calendar')">
+                            <span>📅 Ver Calendario Completo</span>
+                        </button>
+                    </div>
+                    <div id="todayOrdersList" class="table-responsive">
+                        <p style="color: var(--text-muted); padding: 16px;">Cargando pedidos de hoy...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VISTA 2: INSUMOS E INGREDIENTES -->
+            <section id="view-ingredients" class="view-section">
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h2 class="card-title">Insumos y Costos Unitarios</h2>
+                            <p class="card-subtitle">Al actualizar el costo de un insumo, se recalculan automáticamente en cascada todos los escandallos dependientes.</p>
+                        </div>
+                        <button class="btn btn-primary" onclick="adminApp.openIngredientModal()">
+                            <span>+ Nuevo Insumo</span>
+                        </button>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Insumo</th>
+                                    <th>Unidad</th>
+                                    <th>Costo Unitario ($)</th>
+                                    <th>Stock Actual</th>
+                                    <th>Recetas Asociadas</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ingredientsTableBody">
+                                <tr><td colspan="6" style="text-align: center;">Cargando insumos...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VISTA 3: CONSTRUCTOR DE ESCANDALLOS -->
+            <section id="view-recipes" class="view-section">
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h2 class="card-title">Constructor de Escandallos y Costos</h2>
+                            <p class="card-subtitle">Fórmula: Costo Base = Σ(Insumo × Cantidad) | PVP = Costo × (1 + Margen% + CostosFijos%)</p>
+                        </div>
+                    </div>
+
+                    <div class="escandallo-layout">
+                        <!-- Lista de Selección de Producto -->
+                        <div class="product-selector-box">
+                            <h3 style="font-size: 0.95rem; margin-bottom: 12px; color: var(--text-muted); text-transform: uppercase;">Seleccionar Producto:</h3>
+                            <div class="product-selector-list" id="recipeProductSelectorList">
+                                <!-- Botones de productos inyectados vía JS -->
+                            </div>
+                        </div>
+
+                        <!-- Detalle y Desglose de Escandallo -->
+                        <div class="escandallo-details-box" id="escandalloDetailsBox">
+                            <div class="escandallo-summary-box">
+                                <div class="summary-metric">
+                                    <div class="label">Costo Materia Prima</div>
+                                    <div class="amount" id="recipeCostPrice">$0.00</div>
+                                </div>
+                                <div class="summary-metric">
+                                    <div class="label">Margen de Ganancia</div>
+                                    <div class="amount" id="recipeMarginPct">35%</div>
+                                </div>
+                                <div class="summary-metric">
+                                    <div class="label">Costos Fijos Operativos</div>
+                                    <div class="amount" id="recipeOverheadPct">15%</div>
+                                </div>
+                                <div class="summary-metric highlight">
+                                    <div class="label">Precio de Venta Final</div>
+                                    <div class="amount" id="recipeFinalPrice">$0.00</div>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                                <h3 style="font-size: 1.1rem; color: var(--secondary);">Ingredientes en esta Receta</h3>
+                                <button class="btn btn-secondary btn-sm" onclick="adminApp.openAddRecipeItemModal()">
+                                    <span>+ Añadir Insumo</span>
+                                </button>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Ingrediente</th>
+                                            <th>Cantidad Requerida</th>
+                                            <th>Costo Unitario</th>
+                                            <th>Subtotal Insumo</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="recipeItemsTableBody">
+                                        <tr><td colspan="5" style="text-align: center;">Seleccione un producto para ver su escandallo.</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VISTA 4: PRODUCTOS Y CATÁLOGO -->
+            <section id="view-products" class="view-section">
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h2 class="card-title">Gestión de Productos</h2>
+                            <p class="card-subtitle">Control de visibilidad instantánea en catálogo web, márgenes comerciales y fotos de exhibición.</p>
+                        </div>
+                        <button class="btn btn-primary" onclick="adminApp.openProductModal()">
+                            <span>+ Nuevo Producto</span>
+                        </button>
+                    </div>
+
+                    <div class="products-admin-grid" id="productsAdminGrid">
+                        <!-- Tarjetas de producto inyectadas vía JS -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- VISTA 5: AGENDA Y CALENDARIO DE PRODUCCIÓN -->
+            <section id="view-calendar" class="view-section">
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h2 class="card-title">Agenda de Producción y Entregas</h2>
+                            <p class="card-subtitle">Capacidad máxima: 8 pedidos diarios. Entregas de lunes a sábado de 17:00 a 20:00 hs (domingos cerrado).</p>
+                        </div>
+                        <button class="btn btn-primary" onclick="adminApp.openOrderModal()">
+                            <span>+ Registrar Pedido Manual</span>
+                        </button>
+                    </div>
+
+                    <!-- Lista de Pedidos -->
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Fecha Entrega</th>
+                                    <th>Cliente</th>
+                                    <th>Teléfono / WhatsApp</th>
+                                    <th>Detalle del Pedido</th>
+                                    <th>Total ($)</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ordersTableBody">
+                                <tr><td colspan="7" style="text-align: center;">Cargando pedidos...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- MODAL: INGREDIENTE -->
+    <div class="modal-overlay" id="ingredientModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="ingredientModalTitle">Nuevo Insumo</h3>
+                <button class="modal-close" onclick="adminApp.closeModal('ingredientModal')">&times;</button>
+            </div>
+            <form id="ingredientForm" onsubmit="adminApp.saveIngredient(event)">
+                <div class="modal-body">
+                    <input type="hidden" id="ingredientId">
+                    <div class="form-group">
+                        <label class="form-label">Nombre del Insumo:</label>
+                        <input type="text" id="ingredientName" class="form-input" placeholder="Ej. Harina 0000" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Unidad de Medida:</label>
+                        <select id="ingredientUnit" class="form-select" required>
+                            <option value="gr">Gramos (gr)</option>
+                            <option value="kg">Kilogramos (kg)</option>
+                            <option value="ml">Mililitros (ml)</option>
+                            <option value="l">Litros (l)</option>
+                            <option value="unidad">Unidad (u)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Costo por Unidad ($):</label>
+                        <input type="number" step="0.01" id="ingredientCost" class="form-input" placeholder="0.00" required>
+                        <small style="color: var(--primary); font-size: 0.75rem; display: block; margin-top: 4px;">
+                            * Este costo actualizará automáticamente todas las recetas donde se utilice.
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Stock Actual en Taller:</label>
+                        <input type="number" step="0.01" id="ingredientStock" class="form-input" placeholder="0.00">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="adminApp.closeModal('ingredientModal')">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Insumo</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: PRODUCTO -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="productModalTitle">Nuevo Producto</h3>
+                <button class="modal-close" onclick="adminApp.closeModal('productModal')">&times;</button>
+            </div>
+            <form id="productForm" onsubmit="adminApp.saveProduct(event)">
+                <div class="modal-body">
+                    <input type="hidden" id="productId">
+                    <div class="form-group">
+                        <label class="form-label">Nombre del Producto:</label>
+                        <input type="text" id="productName" class="form-input" placeholder="Ej. Pastafrola Tradicional" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Categoría:</label>
+                        <select id="productCategory" class="form-select" required>
+                            <option value="daily">Producto Diario (Bizcochuelos, Maicenitas, Pastafrolas, Galletas)</option>
+                            <option value="event">Mesa Dulce & Eventos (Tortas temáticas, mesas de postres)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Descripción para Catálogo:</label>
+                        <textarea id="productDescription" class="form-textarea" rows="3" placeholder="Descripción artesanal que verá el cliente..."></textarea>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+                        <div class="form-group">
+                            <label class="form-label">Margen Ganancia (%):</label>
+                            <input type="number" step="0.5" id="productMargin" class="form-input" value="35.00" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Costos Fijos (%):</label>
+                            <input type="number" step="0.5" id="productOverhead" class="form-input" value="15.00" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Ruta de Foto / Imagen:</label>
+                        <input type="text" id="productImage" class="form-input" placeholder="assets/images/...">
+                    </div>
+                    <div class="form-group" style="display: flex; align-items: center; gap: 10px;">
+                        <label class="switch">
+                            <input type="checkbox" id="productIsActive" checked>
+                            <span class="slider"></span>
+                        </label>
+                        <span class="form-label" style="margin: 0;">Visible inmediatamente en catálogo público</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="adminApp.closeModal('productModal')">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Producto</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: AÑADIR INGREDIENTE A ESCANDALLO -->
+    <div class="modal-overlay" id="recipeItemModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Añadir Insumo al Escandallo</h3>
+                <button class="modal-close" onclick="adminApp.closeModal('recipeItemModal')">&times;</button>
+            </div>
+            <form id="recipeItemForm" onsubmit="adminApp.saveRecipeItem(event)">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="form-label">Seleccionar Insumo:</label>
+                        <select id="recipeIngredientSelect" class="form-select" required>
+                            <!-- Inyectado por JS -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Cantidad Requerida:</label>
+                        <input type="number" step="0.01" id="recipeQuantityRequired" class="form-input" placeholder="Ej. 250" required>
+                        <span id="recipeUnitHint" style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-top: 4px;"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="adminApp.closeModal('recipeItemModal')">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Agregar Insumo</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: NUEVO PEDIDO MANUAL -->
+    <div class="modal-overlay" id="orderModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Registrar Pedido Manual</h3>
+                <button class="modal-close" onclick="adminApp.closeModal('orderModal')">&times;</button>
+            </div>
+            <form id="orderForm" onsubmit="adminApp.saveOrder(event)">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="form-label">Nombre del Cliente:</label>
+                        <input type="text" id="orderClientName" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Teléfono / WhatsApp:</label>
+                        <input type="text" id="orderClientPhone" class="form-input" placeholder="Ej. 3804232210" required>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+                        <div class="form-group">
+                            <label class="form-label">Fecha de Entrega:</label>
+                            <input type="date" id="orderDeliveryDate" class="form-input" required onchange="adminApp.verifyOrderDateAvailability(this.value)">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Horario:</label>
+                            <input type="text" id="orderTimeSlot" class="form-input" value="17:00 a 20:00 hs" readonly>
+                        </div>
+                    </div>
+                    <div id="orderAvailabilityNotice" style="margin-bottom: 14px; font-size: 0.8rem;"></div>
+                    <div class="form-group">
+                        <label class="form-label">Producto Principal / Detalle:</label>
+                        <select id="orderProductSelect" class="form-select" onchange="adminApp.onOrderProductChange()">
+                            <!-- Llenado con productos -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Monto Total ($):</label>
+                        <input type="number" step="0.01" id="orderTotalPrice" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Notas / Instrucciones de Entrega:</label>
+                        <textarea id="orderNotes" class="form-textarea" rows="2" placeholder="Dirección, piso, o pedidos especiales..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="adminApp.closeModal('orderModal')">Cancelar</button>
+                    <button type="submit" id="btnSubmitOrder" class="btn btn-primary">Asentar Pedido</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Contenedor de Toasts -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>

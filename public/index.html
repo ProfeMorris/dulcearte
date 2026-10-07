@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Dulce Arte - Pastelería artesanal de autor por encargo. Bizcochuelos, maicenitas, pastafrolas y mesas dulces para eventos. Entregas de lunes a sábado de 17:00 a 20:00 hs.">
+    <meta name="keywords"
+        content="pasteleria, dulce arte, pastafrola, maicenitas, tortas de eventos, repostería artesanal">
+    <title>Dulce Arte | Pastelería Artesanal por Encargo</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍰</text></svg>">
+</head>
+
+<body>
+
+    <!-- Barra Superior de Información y Horarios -->
+    <div class="announcement-bar">
+        <span>🕒 <strong>Modalidad por Encargo Previo:</strong> Entregas de Lunes a Sábado de <span
+                id="deliveryHoursLabel">17:00 a 20:00 hs</span>. Cupos diarios limitados.</span>
+    </div>
+
+    <!-- Navegación Principal -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="/" class="logo-wrapper">
+                <div class="logo-symbol">🍰</div>
+                <span class="logo-text brand-font">Dulce Arte</span>
+            </a>
+
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#inicio" class="nav-link">Inicio</a></li>
+                    <li><a href="#historia" class="nav-link">Nuestra Historia</a></li>
+                    <li><a href="#catalogo" class="nav-link">Catálogo</a></li>
+                    <li><a href="#eventos" class="nav-link">Mesas Dulces</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-actions">
+                <button type="button" class="cart-trigger-btn" id="cartTriggerBtn">
+                    <span>🛒</span>
+                    <span>Mi Pedido</span>
+                    <span class="cart-badge" id="cartCounterBadge">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section" id="inicio">
+        <div class="container hero-grid">
+            <div class="hero-text-col">
+                <div class="hero-tagline">✨ Pastelería Artesanal Familiar</div>
+                <h1 class="hero-title">El auténtico sabor <span>hecho a mano</span> con dedicación.</h1>
+                <p class="hero-desc">
+                    Elaboramos cada receta desde cero con manteca de primera línea, dulce de leche repostero premium y
+                    frutas frescas. Horneado fresco bajo pedido para que disfrutes la máxima calidad en tu mesa.
+                </p>
+                <div class="hero-cta-group">
+                    <a href="#catalogo" class="btn-hero">
+                        <span>Ver Catálogo Digital</span>
+                        <span>↓</span>
+                    </a>
+                    <a href="https://wa.me/5493804232210" target="_blank" class="btn-hero"
+                        style="background: #25d366; box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);">
+                        <span>Consultar por WhatsApp</span>
+                    </a>
+                </div>
+
+                <div class="hero-features">
+                    <div class="feature-item">
+                        <span class="feature-icon">🥣</span>
+                        <span class="feature-text">Materia Prima Noble</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">👩‍🍳</span>
+                        <span class="feature-text">Recetas Caseras Reales</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🛵</span>
+                        <span class="feature-text">Delivery 17 a 20 hs</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-media-col">
+                <div class="hero-img-card">
+                    <img src="/assets/images/hero_dulce_arte.jpg" alt="Mesa de pastelería artesanal Dulce Arte"
+                        loading="eager">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HISTORIA Y REDES SOCIALES -->
+    <section class="story-section" id="historia">
+        <div class="container story-grid">
+            <div class="story-img-col">
+                <div
+                    style="border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-soft); aspect-ratio: 4/3;">
+                    <img src="/assets/images/pastafrola_membrillo.jpg" alt="Pastafrola casera en proceso"
+                        style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+            </div>
+            <div class="story-content">
+                <div class="hero-tagline">Tradición Pastelera</div>
+                <h2>El corazón de Dulce Arte</h2>
+                <p>
+                    Dulce Arte nació de la pasión por la pastelería clásica y los aromas que llenaban la cocina de la
+                    abuela. Creemos en el tiempo que lleva batir a mano, el reposo exacto de las masas y la generosidad
+                    de los rellenos.
+                </p>
+                <p>
+                    Trabajamos exclusivamente a través de <strong>encargos previos</strong> para garantizar que cada
+                    pastafrola, bandeja de maicenitas o torta de cumpleaños salga de nuestro horno pocas horas antes de
+                    llegar a tus manos.
+                </p>
+
+                <div class="social-links-bar">
+                    <a href="https://instagram.com/dulceartelr" target="_blank" class="social-btn instagram">
+                        <span>📸</span>
+                        <span>@dulceartelr</span>
+                    </a>
+                    <a href="https://facebook.com/dulceartedulce" target="_blank" class="social-btn facebook">
+                        <span>👥</span>
+                        <span>@dulceartedulce</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CATÁLOGO DE PRODUCTOS -->
+    <section class="catalog-section" id="catalogo">
+        <div class="container">
+            <div class="section-header">
+                <h2>Nuestro Catálogo de Dulzuras</h2>
+                <p>Explora nuestras creaciones para meriendas cotidianas o celebraciones inolvidables.</p>
+            </div>
+
+            <!-- Filtros de Categoría -->
+            <div class="category-filters">
+                <button type="button" class="filter-btn active" data-category="all">Todos los Productos</button>
+                <button type="button" class="filter-btn" data-category="daily">Productos Diarios</button>
+                <button type="button" class="filter-btn" data-category="event">Mesa Dulce & Eventos</button>
+            </div>
+
+            <!-- Grid Dinámico de Productos -->
+            <div class="products-grid" id="productsGrid">
+                <!-- Se pobla dinámicamente mediante catalog.js -->
+            </div>
+
+            <!-- Banner para Eventos Especiales -->
+            <div class="event-banner-card" id="eventos">
+                <div>
+                    <h3>¿Estás planeando un Cumpleaños, Bautismo o Casamiento?</h3>
+                    <p>Diseñamos mesas dulces personalizadas completas: tortas temáticas con drip y flores naturales,
+                        mini tartas surtidas, shots dulces y bocaditos artesanales.</p>
+                </div>
+                <a href="https://wa.me/5493804232210?text=%C2%A1Hola%20Dulce%20Arte!%20Quisiera%20solicitar%20un%20presupuesto%20personalizado%20para%20una%20Mesa%20Dulce%20/%20Evento."
+                    target="_blank" class="btn-quote-event">
+                    <span>💬</span>
+                    <span>Pedir Presupuesto a Medida</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- DRAWER DEL CARRITO & GENERADOR DE PEDIDO WHATSAPP -->
+    <div class="cart-drawer-overlay" id="cartDrawerOverlay">
+        <aside class="cart-drawer">
+            <div class="cart-header">
+                <h3 class="brand-font">Tu Encargo</h3>
+                <button class="cart-close-btn" id="cartCloseBtn">&times;</button>
+            </div>
+
+            <div class="cart-items-body" id="cartItemsList">
+                <!-- Items agregados inyectados por JS -->
+            </div>
+
+            <div class="cart-checkout-form">
+                <div class="form-group-compact">
+                    <label class="form-label-compact" for="deliveryDateInput">Fecha deseada de entrega (17 a 20
+                        hs):</label>
+                    <input type="date" id="deliveryDateInput" class="form-input-compact" required>
+                    <div id="availabilityAlert" class="availability-alert"></div>
+                </div>
+
+                <div class="form-group-compact">
+                    <label class="form-label-compact" for="clientNameInput">Tu Nombre Completo:</label>
+                    <input type="text" id="clientNameInput" class="form-input-compact" placeholder="Ej. Juan Pérez"
+                        required>
+                </div>
+
+                <div class="form-group-compact">
+                    <label class="form-label-compact" for="clientPhoneInput">Tu Teléfono de Contacto:</label>
+                    <input type="tel" id="clientPhoneInput" class="form-input-compact" placeholder="Ej. 3804-123456">
+                </div>
+
+                <div class="cart-total-box">
+                    <span>Total Estimado:</span>
+                    <span class="cart-total-amount" id="cartTotalAmount">$0.00</span>
+                </div>
+
+                <button type="button" class="btn-whatsapp-order" id="btnSubmitWhatsApp">
+                    <span>📱 Enviar Encargo por WhatsApp</span>
+                </button>
+                <small
+                    style="color: var(--text-muted); font-size: 0.75rem; text-align: center; display: block; margin-top: 8px;">
+                    Al presionar, se abrirá WhatsApp con el pedido listo para enviar y confirmar disponibilidad.
+                </small>
+            </div>
+        </aside>
+    </div>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                    <span style="font-size: 24px;">🍰</span>
+                    <h4 style="margin: 0;">Dulce Arte</h4>
+                </div>
+                <p style="font-size: 0.9rem; line-height: 1.6; max-width: 360px;">
+                    Pastelería artesanal hecha con amor y paciencia. Horneamos tus momentos más dulces bajo encargo
+                    previo.
+                </p>
+                <p style="font-size: 0.85rem; color: #a99a8e; margin-top: 12px;">
+                    📍 Entregas a domicilio de Lunes a Sábado de 17:00 a 20:00 hs.
+                </p>
+            </div>
+
+            <div class="footer-col">
+                <h5>Nuestras Redes</h5>
+                <ul>
+                    <li><a href="https://instagram.com/dulceartelr" target="_blank">📸 Instagram: @dulceartelr</a></li>
+                    <li><a href="https://facebook.com/dulceartedulce" target="_blank">👥 Facebook: @dulceartedulce</a>
+                    </li>
+                    <li><a href="https://wa.me/5493804232210" target="_blank">💬 WhatsApp: 3804-232210</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5>Gestión Interna</h5>
+                <ul>
+                    <li><a href="/admin" target="_blank" style="color: var(--gold); font-weight: 600;">🔐 Panel de
+                            Pastelero (Admin)</a></li>
+                    <li><a href="/admin#recipes" target="_blank">📐 Escandallos & Costos</a></li>
+                    <li><a href="/admin#calendar" target="_blank">📅 Agenda de Producción</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2026 Dulce Arte - Todos los derechos reservados. Sistema Integral de Pastelería Artesanal.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts de la Aplicación -->
+    <script src="/assets/js/catalog.js"></script>
+</body>
+
+</html>

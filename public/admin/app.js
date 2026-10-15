@@ -75,7 +75,9 @@ class AdminApp {
             }
         } catch (e) {
             const badge = document.getElementById('systemHealthText');
-            if (badge) badge.textContent = 'Modo Local';
+            if (badge) badge.textContent = 'Servidor offline';
+            this.serverOffline = true;
+            this.showToast('⚠️ Servidor PHP no disponible. Ejecutá start-server.bat para iniciarlo.', 'error');
         }
     }
 
@@ -298,7 +300,7 @@ class AdminApp {
                 this.showToast(data.error || 'Error al guardar insumo', 'error');
             }
         } catch (err) {
-            this.showToast('Error de conexión', 'error');
+            this.showToast('Sin conexión con el servidor. ¿Está corriendo start-server.bat?', 'error');
         }
     }
 
@@ -316,7 +318,7 @@ class AdminApp {
                 this.showToast(data.error || 'No se pudo eliminar el insumo', 'error');
             }
         } catch (e) {
-            this.showToast('Error de conexión', 'error');
+            this.showToast('Sin conexión con el servidor. ¿Está corriendo start-server.bat?', 'error');
         }
     }
 

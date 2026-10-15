@@ -19,8 +19,17 @@
 
     <!-- Estilos -->
     <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍰</text></svg>">
+    
+    <!-- PWA y Capacidades Móviles Multiplataforma -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#c85a53">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Dulce Arte">
+    <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/icon-192x192.png">
 </head>
 
 <body>
@@ -35,7 +44,7 @@
     <header class="navbar">
         <div class="container nav-container">
             <a href="/" class="logo-wrapper">
-                <div class="logo-symbol">🍰</div>
+                <img src="/assets/icons/icon-96x96.png" alt="Dulce Arte Logo" class="brand-logo-img">
                 <span class="logo-text brand-font">Dulce Arte</span>
             </a>
 
@@ -49,6 +58,10 @@
             </nav>
 
             <div class="nav-actions">
+                <button type="button" class="btn-pwa-install pwa-install-btn" id="navInstallBtn" onclick="triggerPWAInstall()" title="Instalar aplicación Dulce Arte">
+                    <span class="install-icon">📲</span>
+                    <span>Instalar App</span>
+                </button>
                 <button type="button" class="cart-trigger-btn" id="cartTriggerBtn">
                     <span>🛒</span>
                     <span>Mi Pedido</span>
@@ -73,6 +86,9 @@
                         <span>Ver Catálogo Digital</span>
                         <span>↓</span>
                     </a>
+                    <button type="button" class="btn-hero btn-pwa-install pwa-install-btn" id="heroInstallBtn" onclick="triggerPWAInstall()" style="background: linear-gradient(135deg, #c85a53 0%, #b24842 100%);">
+                        <span>📲 Instalar Aplicación</span>
+                    </button>
                     <a href="https://wa.me/5493804232210" target="_blank" class="btn-hero"
                         style="background: #25d366; box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);">
                         <span>Consultar por WhatsApp</span>
@@ -270,7 +286,45 @@
         </div>
     </footer>
 
-    <!-- Scripts de la Aplicación -->
+    <!-- Banner Flotante Inferior de Instalación PWA -->
+    <div class="pwa-install-banner" id="pwaInstallBanner">
+        <img src="/assets/icons/icon-96x96.png" alt="Dulce Arte App" class="pwa-banner-icon">
+        <div class="pwa-banner-text">
+            <div class="pwa-banner-title">Instalar Dulce Arte</div>
+            <div class="pwa-banner-sub">Acceso rápido desde tu pantalla de inicio y pedidos offline.</div>
+        </div>
+        <div class="pwa-banner-actions">
+            <button type="button" class="btn-banner-install" onclick="triggerPWAInstall()">Instalar</button>
+            <button type="button" class="btn-banner-dismiss" onclick="dismissPWABanner()" title="Cerrar">✕</button>
+        </div>
+    </div>
+
+    <!-- Modal Guía para iOS Safari -->
+    <div class="pwa-ios-modal-overlay" id="pwaIosModal">
+        <div class="pwa-ios-modal">
+            <img src="/assets/icons/icon-192x192.png" alt="Dulce Arte">
+            <h4>Instala Dulce Arte en tu iPhone</h4>
+            <p>Agrega la aplicación a tu pantalla de inicio para acceder rápidamente y disfrutar de la experiencia completa:</p>
+            <div class="pwa-ios-steps">
+                <div class="pwa-ios-step">
+                    <div class="pwa-step-icon">📤</div>
+                    <span>1. Toca el botón <strong>Compartir</strong> en la barra inferior de Safari.</span>
+                </div>
+                <div class="pwa-ios-step">
+                    <div class="pwa-step-icon">➕</div>
+                    <span>2. Desplázate hacia abajo y selecciona <strong>Agregar a pantalla de inicio</strong>.</span>
+                </div>
+                <div class="pwa-ios-step">
+                    <div class="pwa-step-icon">✨</div>
+                    <span>3. Presiona <strong>Agregar</strong> en la esquina superior derecha.</span>
+                </div>
+            </div>
+            <button type="button" class="btn-ios-close" onclick="closeIosModal()">¡Entendido!</button>
+        </div>
+    </div>
+
+    <!-- Scripts de la Aplicación y PWA -->
+    <script src="/assets/js/pwa.js"></script>
     <script src="/assets/js/catalog.js"></script>
 </body>
 

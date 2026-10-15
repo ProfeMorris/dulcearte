@@ -25,20 +25,24 @@ if (is_file($publicFile)) {
     // Servir con el tipo MIME correcto
     $ext = pathinfo($publicFile, PATHINFO_EXTENSION);
     $mimes = [
-        'css'  => 'text/css',
-        'js'   => 'application/javascript',
-        'json' => 'application/json',
-        'jpg'  => 'image/jpeg',
-        'jpeg' => 'image/jpeg',
-        'png'  => 'image/png',
-        'gif'  => 'image/gif',
-        'svg'  => 'image/svg+xml',
-        'ico'  => 'image/x-icon',
-        'woff2'=> 'font/woff2',
-        'html' => 'text/html; charset=utf-8'
+        'css'         => 'text/css',
+        'js'          => 'application/javascript',
+        'json'        => 'application/json',
+        'webmanifest' => 'application/manifest+json',
+        'jpg'         => 'image/jpeg',
+        'jpeg'        => 'image/jpeg',
+        'png'         => 'image/png',
+        'gif'         => 'image/gif',
+        'svg'         => 'image/svg+xml',
+        'ico'         => 'image/x-icon',
+        'woff2'       => 'font/woff2',
+        'html'        => 'text/html; charset=utf-8'
     ];
     if (isset($mimes[$ext])) {
         header("Content-Type: {$mimes[$ext]}");
+    }
+    if ($ext === 'js' && basename($publicFile) === 'sw.js') {
+        header('Service-Worker-Allowed: /');
     }
     readfile($publicFile);
     return;

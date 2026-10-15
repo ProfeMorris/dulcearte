@@ -52,16 +52,16 @@ try {
         (new IngredientController())->index();
     }
     if (preg_match('#^/api/ingredients/(\d+)$#', $apiPath, $m) && $method === 'GET') {
-        (new IngredientController())->show((int)$m[1]);
+        (new IngredientController())->show((int) $m[1]);
     }
     if ($apiPath === '/api/ingredients' && $method === 'POST') {
         (new IngredientController())->create();
     }
     if (preg_match('#^/api/ingredients/(\d+)$#', $apiPath, $m) && in_array($method, ['PUT', 'PATCH', 'POST'])) {
-        (new IngredientController())->update((int)$m[1]);
+        (new IngredientController())->update((int) $m[1]);
     }
     if (preg_match('#^/api/ingredients/(\d+)$#', $apiPath, $m) && $method === 'DELETE') {
-        (new IngredientController())->delete((int)$m[1]);
+        (new IngredientController())->delete((int) $m[1]);
     }
 
     // 3. Productos
@@ -69,36 +69,36 @@ try {
         (new ProductController())->index();
     }
     if (preg_match('#^/api/products/(\d+)$#', $apiPath, $m) && $method === 'GET') {
-        (new ProductController())->show((int)$m[1]);
+        (new ProductController())->show((int) $m[1]);
     }
     if ($apiPath === '/api/products' && $method === 'POST') {
         (new ProductController())->create();
     }
     if (preg_match('#^/api/products/(\d+)$#', $apiPath, $m) && in_array($method, ['PUT', 'POST'])) {
-        (new ProductController())->update((int)$m[1]);
+        (new ProductController())->update((int) $m[1]);
     }
     if (preg_match('#^/api/products/(\d+)/toggle-catalog$#', $apiPath, $m) && in_array($method, ['PATCH', 'POST'])) {
-        (new ProductController())->toggleCatalog((int)$m[1]);
+        (new ProductController())->toggleCatalog((int) $m[1]);
     }
     if (preg_match('#^/api/products/(\d+)/recalculate$#', $apiPath, $m) && $method === 'POST') {
-        (new ProductController())->recalculate((int)$m[1]);
+        (new ProductController())->recalculate((int) $m[1]);
     }
     if (preg_match('#^/api/products/(\d+)$#', $apiPath, $m) && $method === 'DELETE') {
-        (new ProductController())->delete((int)$m[1]);
+        (new ProductController())->delete((int) $m[1]);
     }
 
     // 4. Recetas / Escandallos
     if (preg_match('#^/api/recipes/(\d+)$#', $apiPath, $m) && $method === 'GET') {
-        (new RecipeController())->show((int)$m[1]);
+        (new RecipeController())->show((int) $m[1]);
     }
     if (preg_match('#^/api/recipes/(\d+)$#', $apiPath, $m) && $method === 'POST') {
-        (new RecipeController())->saveItem((int)$m[1]);
+        (new RecipeController())->saveItem((int) $m[1]);
     }
     if (preg_match('#^/api/recipes/(\d+)$#', $apiPath, $m) && $method === 'PUT') {
-        (new RecipeController())->sync((int)$m[1]);
+        (new RecipeController())->sync((int) $m[1]);
     }
     if (preg_match('#^/api/recipes/items/(\d+)$#', $apiPath, $m) && $method === 'DELETE') {
-        (new RecipeController())->deleteItem((int)$m[1]);
+        (new RecipeController())->deleteItem((int) $m[1]);
     }
 
     // 5. Pedidos y Agenda
@@ -106,16 +106,16 @@ try {
         (new OrderController())->index();
     }
     if (preg_match('#^/api/orders/(\d+)$#', $apiPath, $m) && $method === 'GET') {
-        (new OrderController())->show((int)$m[1]);
+        (new OrderController())->show((int) $m[1]);
     }
     if ($apiPath === '/api/orders' && $method === 'POST') {
         (new OrderController())->create();
     }
     if (preg_match('#^/api/orders/(\d+)/status$#', $apiPath, $m) && in_array($method, ['PATCH', 'POST'])) {
-        (new OrderController())->updateStatus((int)$m[1]);
+        (new OrderController())->updateStatus((int) $m[1]);
     }
     if (preg_match('#^/api/orders/(\d+)$#', $apiPath, $m) && $method === 'DELETE') {
-        (new OrderController())->delete((int)$m[1]);
+        (new OrderController())->delete((int) $m[1]);
     }
 
     // Si no coincide con ninguna ruta API

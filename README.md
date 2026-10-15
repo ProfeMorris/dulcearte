@@ -123,6 +123,19 @@ FACEBOOK_USER=dulceartedulce
 
 ---
 
+## 📲 Aplicación Progresiva (PWA) e Instalación Universal
+
+**Dulce Arte** es una Progressive Web App (PWA) lista para instalar y funcionar en cualquier dispositivo (Android, iOS/iPadOS, Windows, macOS y Linux):
+
+* **Iconos adaptativos:** Generados a partir de la identidad visual de la marca (`512x512`, `384x384`, `192x192`, `maskable`, `apple-touch-icon`).
+* **Soporte Offline Completo:** Mediante el Service Worker (`sw.js`), la aplicación precachea recursos críticos para funcionar aun sin conexión a internet o con señal intermitente.
+* **Instalación con 1 Clic:**
+  * **Android / Chrome / Edge:** Detección automática del evento `beforeinstallprompt` con botones directos "📲 Instalar App" en la barra de navegación, en el hero y en el banner flotante inferior.
+  * **iPhone / iPad (iOS Safari):** Modal guiado paso a paso para añadir la app a la pantalla de inicio ("Compartir 📤" > "Agregar a Inicio ➕").
+  * **Modo Autónomo (Standalone):** Al abrirse desde el icono instalado, se ejecuta sin barras del navegador como una app nativa.
+
+---
+
 ## 🧪 Pruebas Unitarias del Motor
 
 Para ejecutar las pruebas del motor de costos, recálculo en cascada y validación de domingos:

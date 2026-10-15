@@ -876,3 +876,251 @@ h1, h2, h3, .brand-font {
         grid-template-columns: 1fr;
     }
 }
+
+/* ============================================================
+   ESTILOS PWA (Progressive Web App)
+   ============================================================ */
+.brand-logo-img {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border: 2px solid #fff;
+}
+
+.btn-pwa-install {
+    display: none; /* Se activa dinámicamente si la app es instalable */
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #c85a53 0%, #b24842 100%);
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 24px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(200, 90, 83, 0.35);
+    transition: var(--transition);
+}
+
+.btn-pwa-install:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(200, 90, 83, 0.45);
+    background: linear-gradient(135deg, #d4635c 0%, #c85a53 100%);
+}
+
+.btn-pwa-install .install-icon {
+    font-size: 1.1rem;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-4px); }
+    60% { transform: translateY(-2px); }
+}
+
+/* Banner Flotante Inferior de Instalación PWA */
+.pwa-install-banner {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(120px);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(200, 90, 83, 0.2);
+    box-shadow: 0 12px 32px rgba(38, 23, 16, 0.18);
+    border-radius: 20px;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    z-index: 190;
+    max-width: 90%;
+    width: 480px;
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, visibility 0.4s;
+}
+
+.pwa-install-banner.visible {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.pwa-banner-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    object-fit: cover;
+    flex-shrink: 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+.pwa-banner-text {
+    flex-grow: 1;
+}
+
+.pwa-banner-title {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--secondary);
+    margin-bottom: 2px;
+}
+
+.pwa-banner-sub {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.pwa-banner-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.btn-banner-install {
+    background: var(--primary-gradient);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-banner-install:hover {
+    transform: scale(1.05);
+}
+
+.btn-banner-dismiss {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 4px;
+    line-height: 1;
+    border-radius: 50%;
+}
+
+.btn-banner-dismiss:hover {
+    color: var(--secondary);
+}
+
+/* Modal Instructivo para iOS Safari */
+.pwa-ios-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(38, 23, 16, 0.6);
+    backdrop-filter: blur(6px);
+    z-index: 300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+}
+
+.pwa-ios-modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.pwa-ios-modal {
+    background: #fff;
+    border-radius: 24px;
+    padding: 30px;
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+    animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalPop {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.pwa-ios-modal img {
+    width: 72px;
+    height: 72px;
+    border-radius: 18px;
+    margin-bottom: 16px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.pwa-ios-modal h4 {
+    font-size: 1.3rem;
+    color: var(--secondary);
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.pwa-ios-modal p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.pwa-ios-steps {
+    text-align: left;
+    background: #fffaf5;
+    border: 1px solid #f3ece3;
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.pwa-ios-step {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    font-size: 0.88rem;
+    color: var(--secondary);
+}
+
+.pwa-ios-step:last-child {
+    margin-bottom: 0;
+}
+
+.pwa-step-icon {
+    width: 32px;
+    height: 32px;
+    background: #fff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    border: 1px solid var(--border-light);
+    flex-shrink: 0;
+}
+
+.btn-ios-close {
+    background: var(--primary-gradient);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 24px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%;
+}

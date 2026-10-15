@@ -14,13 +14,15 @@ class Order {
     }
 
     public function all(?string $startDate = null, ?string $endDate = null, ?string $status = null): array {
+        $driver = Database::getDriver();
+        $summarySubquery = ($driver === 'sqlite')
+            ? "(SELECT GROUP_CONCAT(oi.quantity || 'x ' || p.name, ', ') FROM order_items oi JOIN products p ON oi.product_id = p.id WHERE oi.order_id = o.id)"
+            : "(SELECT GROUP_CONCAT(CONCAT(oi.quantity, 'x ', p.name) SEPARATOR ', ') FROM order_items oi JOIN products p ON oi.product_id = p.id WHERE oi.order_id = o.id)";
+
         $sql = "
             SELECT o.*,
                    (SELECT COUNT(*) FROM order_items oi WHERE oi.order_id = o.id) as total_items,
-                   (SELECT GROUP_CONCAT(CONCAT(oi.quantity, 'x ', p.name), ', ') 
-                    FROM order_items oi 
-                    JOIN products p ON oi.product_id = p.id 
-                    WHERE oi.order_id = o.id) as items_summary
+                   {$summarySubquery} as items_summary
             FROM orders o
             WHERE 1=1
         ";

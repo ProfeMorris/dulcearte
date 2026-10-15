@@ -13,8 +13,24 @@ if (str_starts_with($uri, '/api')) {
 }
 
 // Ruta para el panel de administración
-if ($uri === '/admin' || $uri === '/admin/') {
+if ($uri === '/admin') {
+    header('Location: /admin/');
+    exit;
+}
+if ($uri === '/admin/' || $uri === '/admin/index.html') {
     require __DIR__ . '/public/admin/index.html';
+    return;
+}
+
+// Respaldo de seguridad para assets del panel de administración
+if ($uri === '/admin.css') {
+    header('Content-Type: text/css');
+    readfile(__DIR__ . '/public/admin/admin.css');
+    return;
+}
+if ($uri === '/app.js') {
+    header('Content-Type: application/javascript');
+    readfile(__DIR__ . '/public/admin/app.js');
     return;
 }
 

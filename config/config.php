@@ -4,29 +4,31 @@
  */
 
 // Cargar archivo .env de forma ligera sin dependencias externas
-function loadEnv($path) {
-    if (!file_exists($path)) {
-        return;
-    }
-    $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-    foreach ($lines as $line) {
-        $line = trim($line);
-        if ($line === '' || str_starts_with($line, '#')) {
-            continue;
+if (!function_exists('loadEnv')) {
+    function loadEnv($path) {
+        if (!file_exists($path)) {
+            return;
         }
-        if (str_contains($line, '=')) {
-            list($key, $value) = explode('=', $line, 2);
-            $key = trim($key);
-            $value = trim($value);
-            // Quitar comillas si las hay
-            if ((str_starts_with($value, '"') && str_ends_with($value, '"')) ||
-                (str_starts_with($value, "'") && str_ends_with($value, "'"))) {
-                $value = substr($value, 1, -1);
+        $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        foreach ($lines as $line) {
+            $line = trim($line);
+            if ($line === '' || str_starts_with($line, '#')) {
+                continue;
             }
-            if (!array_key_exists($key, $_SERVER) && !array_key_exists($key, $_ENV)) {
-                putenv("{$key}={$value}");
-                $_ENV[$key] = $value;
-                $_SERVER[$key] = $value;
+            if (str_contains($line, '=')) {
+                list($key, $value) = explode('=', $line, 2);
+                $key = trim($key);
+                $value = trim($value);
+                // Quitar comillas si las hay
+                if ((str_starts_with($value, '"') && str_ends_with($value, '"')) ||
+                    (str_starts_with($value, "'") && str_ends_with($value, "'"))) {
+                    $value = substr($value, 1, -1);
+                }
+                if (!array_key_exists($key, $_SERVER) && !array_key_exists($key, $_ENV)) {
+                    putenv("{$key}={$value}");
+                    $_ENV[$key] = $value;
+                    $_SERVER[$key] = $value;
+                }
             }
         }
     }
@@ -35,12 +37,14 @@ function loadEnv($path) {
 $rootPath = dirname(__DIR__);
 loadEnv($rootPath . '/.env');
 
-function env($key, $default = null) {
-    $val = getenv($key);
-    if ($val === false) {
-        return $_ENV[$key] ?? $default;
+if (!function_exists('env')) {
+    function env($key, $default = null) {
+        $val = getenv($key);
+        if ($val === false) {
+            return $_ENV[$key] ?? $default;
+        }
+        return $val;
     }
-    return $val;
 }
 
 return [

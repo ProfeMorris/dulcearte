@@ -65,6 +65,13 @@ class Database {
         // Habilitar claves foráneas en SQLite
         $pdo->exec("PRAGMA foreign_keys = ON;");
 
+        // Registrar funciones compatibles con MySQL en SQLite
+        if (method_exists($pdo, 'sqliteCreateFunction')) {
+            $pdo->sqliteCreateFunction('CONCAT', function (...$args) {
+                return implode('', $args);
+            });
+        }
+
         self::$instance = $pdo;
         self::$driver = 'sqlite';
         return self::$instance;
